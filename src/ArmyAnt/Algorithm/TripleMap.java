@@ -77,6 +77,30 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 	{
 		return keySet();
 	}
+	
+	public java.util.HashMap<T_Key,T_Value1> GetNewMapOfValue1()
+	{
+		java.util.HashMap<T_Key,T_Value1> ret = new java.util.HashMap<T_Key,T_Value1>();
+		T_Key[] keys = null;
+		keys = data.keySet().toArray(keys);
+		for(int i=0;i<keys.length;i++)
+		{
+			ret.put(keys[i], data.get(keys[i]).first);
+		}
+		return ret;
+	}
+	
+	public java.util.HashMap<T_Key,T_Value2> GetNewMapOfValue2()
+	{
+		java.util.HashMap<T_Key,T_Value2> ret = new java.util.HashMap<T_Key,T_Value2>();
+		T_Key[] keys = null;
+		keys = data.keySet().toArray(keys);
+		for(int i=0;i<keys.length;i++)
+		{
+			ret.put(keys[i], data.get(keys[i]).second);
+		}
+		return ret;
+	}
 
 	@Override
 	public void clear() {

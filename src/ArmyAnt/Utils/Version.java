@@ -1,7 +1,7 @@
 package ArmyAnt.Utils;
 
 /**
- * Created by admin on 2016/5/21.
+ * Created by Jason-Zhao-Jie on 2016/5/21.
  */
 public class Version {
     public Version(int ver) {
@@ -25,31 +25,15 @@ public class Version {
     }
 
     public java.lang.String GetVerStr() {
-        return Integer.toString(bigVer) + '.' + Integer.toString(smallVer) + '.' + Integer.toString(patchVer) + '.' + Integer.toString(testVer);
+        return "" + bigVer + '.' + smallVer + '.' + patchVer + '.' + testVer;
     }
 
-    public int GetVer() {
+    public int GetVersionNum() {
         return ((bigVer * 256 + smallVer) * 256 + patchVer) * 256 + testVer;
     }
 
-    public char GetBigVer() {
-        return bigVer;
-    }
-
-    public char GetSmallVer() {
-        return smallVer;
-    }
-
-    public char GetPatchVer() {
-        return patchVer;
-    }
-
-    public char GetTestVer() {
-        return testVer;
-    }
-
-    private char bigVer;
-    private char smallVer;
-    private char patchVer;
-    private char testVer;
+    public char bigVer;
+    public char smallVer;
+    public char patchVer;
+    public char testVer;
 }
