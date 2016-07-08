@@ -71,10 +71,15 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 	{
 		return lines.get(from).containsKey(to);
 	}
-	
+
 	public T_Weight GetLinkWeight(T_Tag from, T_Tag to)
 	{
 		return lines.get(from).get(to);
+	}
+
+	public T_Weight SetLinkWeight(T_Tag from, T_Tag to, T_Weight value)
+	{
+		return lines.get(from).replace(to, value);
 	}
 	
 	public boolean NodeDelinkAllOut(T_Tag tag)
@@ -89,8 +94,7 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 	{
 		if(!lines.containsKey(tag))
 			return false;
-		T_Tag[] keys = null;
-		keys = lines.keySet().toArray(keys);
+		Object[] keys = lines.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
 		{
 			if(lines.get(keys[i]).containsKey(tag))
@@ -106,8 +110,7 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 	
 	public void DelinkAll()
 	{
-		T_Tag[] keys = null;
-		keys = lines.keySet().toArray(keys);
+		Object[] keys = lines.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
 		{
 			lines.get(keys[i]).clear();
@@ -121,27 +124,27 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 		lines.clear();
 	}
 	
-	public T_Tag[] GetNodeAllLinkedOut(T_Tag tag)
+	@SuppressWarnings("unchecked")
+	public T_Tag[] GetNodeAllLinkedIn(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return null;
 		java.util.ArrayList<T_Tag> ret = new java.util.ArrayList<T_Tag>();
-		T_Tag[] keys = null;
-		keys = lines.keySet().toArray(keys);
+		T_Tag[] keys = (T_Tag[]) lines.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
 		{
 			if(lines.get(keys[i]).containsKey(tag))
 				ret.add(keys[i]);
 		}
-		return ret.toArray(keys);
+		return (T_Tag[]) ret.toArray();
 		
 	}
 	
-	public T_Tag[] GetNodeAllLinkedIn(T_Tag tag)
+	@SuppressWarnings("unchecked")
+	public T_Tag[] GetNodeAllLinkedOut(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return null;
-		T_Tag[] ret = null;
-		return lines.get(tag).keySet().toArray(ret);
+		return (T_Tag[]) lines.get(tag).keySet().toArray();
 	}
 }

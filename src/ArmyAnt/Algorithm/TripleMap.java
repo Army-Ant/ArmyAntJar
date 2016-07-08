@@ -81,8 +81,8 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 	public java.util.HashMap<T_Key,T_Value1> GetNewMapOfValue1()
 	{
 		java.util.HashMap<T_Key,T_Value1> ret = new java.util.HashMap<T_Key,T_Value1>();
-		T_Key[] keys = null;
-		keys = data.keySet().toArray(keys);
+		@SuppressWarnings("unchecked")
+		T_Key[] keys = (T_Key[]) data.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
 		{
 			ret.put(keys[i], data.get(keys[i]).first);
@@ -93,8 +93,8 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 	public java.util.HashMap<T_Key,T_Value2> GetNewMapOfValue2()
 	{
 		java.util.HashMap<T_Key,T_Value2> ret = new java.util.HashMap<T_Key,T_Value2>();
-		T_Key[] keys = null;
-		keys = data.keySet().toArray(keys);
+		@SuppressWarnings("unchecked")
+		T_Key[] keys = (T_Key[]) data.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
 		{
 			ret.put(keys[i], data.get(keys[i]).second);
