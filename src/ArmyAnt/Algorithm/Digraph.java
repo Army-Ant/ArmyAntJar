@@ -13,52 +13,53 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 	{
 	}
 	
-	public boolean HasNode(T_Tag tag)
+	public boolean hasNode(T_Tag tag)
 	{
-		return nodes.HasKey(tag);
+		return nodes.containsKey(tag);
 	}
 	
-	public T_Value GetNodeValue(T_Tag tag)
+	public T_Value get(T_Tag tag)
 	{
-		return nodes.GetValues(tag).first;
+		return nodes.get(tag).first;
 	}
 	
-	public boolean SetNodeValue(T_Tag tag, T_Value value)
+	public boolean set(T_Tag tag, T_Value value)
 	{
-		return nodes.SetValue1(tag, value);
+		return nodes.setValue1(tag, value);
 	}
 	
-	public T_Weight GetNodeWeight(T_Tag tag)
+	public T_Weight getWeight(T_Tag tag)
 	{
-		return nodes.GetValues(tag).second;
+		return nodes.get(tag).second;
 	}
 	
-	public boolean SetNodeWeight(T_Tag tag, T_Weight weight)
+	public boolean setWeight(T_Tag tag, T_Weight weight)
 	{
-		return nodes.SetValue2(tag, weight);
+		return nodes.setValue2(tag, weight);
 	}
 	
-	public boolean AddNode(T_Value value, T_Tag tag, T_Weight weight)
+	public boolean put(T_Value value, T_Tag tag, T_Weight weight)
 	{
-		if(! nodes.Insert(tag, value, weight))
+		if(! nodes.insert(tag, value, weight))
 			return false;
 		lines.put(tag,new HashMap<T_Tag,T_Weight>());
 		return true;
 	}
 	
-	public boolean RemoveNode(T_Tag tag)
+	public boolean remove(T_Tag tag)
 	{
 		lines.remove(tag);
-		return nodes.Remove(tag);
+		nodes.remove(tag);
+		return true;
 	}
 	
-	public boolean LinkNode(T_Tag from, T_Tag to, T_Weight weight)
+	public boolean linkNode(T_Tag from, T_Tag to, T_Weight weight)
 	{
 		lines.get(from).put(to, weight);
 		return true;
 	}
 	
-	public boolean DelinkNode(T_Tag from, T_Tag to)
+	public boolean unlinkNode(T_Tag from, T_Tag to)
 	{
 		HashMap<T_Tag,T_Weight> map = lines.get(from);
 		if(!map.containsKey(to))
@@ -67,22 +68,22 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 		return true;
 	}
 	
-	public boolean IsLinked(T_Tag from, T_Tag to)
+	public boolean isLinked(T_Tag from, T_Tag to)
 	{
 		return lines.get(from).containsKey(to);
 	}
 
-	public T_Weight GetLinkWeight(T_Tag from, T_Tag to)
+	public T_Weight getLinkWeight(T_Tag from, T_Tag to)
 	{
 		return lines.get(from).get(to);
 	}
 
-	public T_Weight SetLinkWeight(T_Tag from, T_Tag to, T_Weight value)
+	public T_Weight setLinkWeight(T_Tag from, T_Tag to, T_Weight value)
 	{
 		return lines.get(from).replace(to, value);
 	}
 	
-	public boolean NodeDelinkAllOut(T_Tag tag)
+	public boolean nodeUnlinkAllOut(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return false;
@@ -90,7 +91,7 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 		return true;
 	}
 	
-	public boolean NodeDelinkAllIn(T_Tag tag)
+	public boolean nodeUnlinkAllIn(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return false;
@@ -103,12 +104,12 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 		return true;
 	}
 	
-	public boolean NodeDelinkAll(T_Tag tag)
+	public boolean nodeUnlinkAll(T_Tag tag)
 	{
-		return NodeDelinkAllOut(tag) && NodeDelinkAllIn(tag);
+		return nodeUnlinkAllOut(tag) && nodeUnlinkAllIn(tag);
 	}
 	
-	public void DelinkAll()
+	public void unlinkAll()
 	{
 		Object[] keys = lines.keySet().toArray();
 		for(int i=0;i<keys.length;i++)
@@ -118,14 +119,14 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 		
 	}
 	
-	public void Clear()
+	public void clear()
 	{
-		nodes.Clear();
+		nodes.clear();
 		lines.clear();
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T_Tag[] GetNodeAllLinkedIn(T_Tag tag)
+	public T_Tag[] getNodeAllLinkedIn(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return null;
@@ -141,7 +142,7 @@ public class Digraph<T_Tag, T_Value, T_Weight> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public T_Tag[] GetNodeAllLinkedOut(T_Tag tag)
+	public T_Tag[] getNodeAllLinkedOut(T_Tag tag)
 	{
 		if(!lines.containsKey(tag))
 			return null;

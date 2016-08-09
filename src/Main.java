@@ -12,7 +12,11 @@ import java.util.function.Function;
  */
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Welcome to the ArmyAnt.NeuronNetwork Test!");
+        neuronNetwork_Test();
+    }
+
+    private static void neuronNetwork_Test(){
+        System.out.println("Welcome to the ArmyAnt.NeuronNetwork-Test!");
         System.out.println("Now we will test as an numeric inputer.");
         System.out.println("The numeric inputer has 10x10 pixes as LED numeric board");
         System.out.println("The robot neuron network will learn to recognise those numbers");
@@ -26,7 +30,7 @@ public class Main {
         for (int i = 0; i < 5; i++)
             data[2].put("20" + i, new Userdata(-2, i));
 
-        FeedforwardNeuronNetwork<String, Userdata> network = new FeedforwardNeuronNetwork<String, Userdata>(data, Neuron.GetDoubleSigmoidFunc(1), new Pair<Double, Double>(-1.0, 1.0), 0.1, 0.1);
+        FeedforwardNeuronNetwork<String, Userdata> network = new FeedforwardNeuronNetwork<String, Userdata>(data, Neuron.getDoubleSigmoidFunc(1), new Pair<Double, Double>(-1.0, 1.0), 0.1, 0.1);
         System.out.println("Initialized OK !");
         System.out.print("Robot learning ... times :        0 / 65536");
 
@@ -49,7 +53,7 @@ public class Main {
                         inputingMap.put("0" + x + y, 0.0);
                 }
             }
-            return network.Input(inputingMap);
+            return network.input(inputingMap);
         };
         for (int i = 65536; i >= 0; --i) {
             for (int n = 0; n < 5; n++) {

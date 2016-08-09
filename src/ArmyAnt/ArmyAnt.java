@@ -25,11 +25,11 @@ public class ArmyAnt {
     public static final long c_2xP = c_2xT * c_2xK;
     public static final long c_2xE = c_2xP * c_2xK;
 
-    public static void DebugLog(java.lang.String str) {
+    public static void debugLog(java.lang.String str) {
         System.out.println(str);
     }
 
-    public static void DebugError(java.lang.String str) {
+    public static void debugError(java.lang.String str) {
         System.err.println(str);
     }
 }

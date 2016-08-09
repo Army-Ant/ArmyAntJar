@@ -9,22 +9,7 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 	
 	public TripleMap(){}
 	
-	public boolean Empty()
-	{
-		return isEmpty();
-	}
-	
-	public boolean HasKey(T_Key key)
-	{
-		return containsKey(key);
-	}
-	
-	public Pair<T_Value1, T_Value2> GetValues(T_Key key)
-	{
-		return get(key);
-	}
-	
-	public boolean SetValues(T_Key key, T_Value1 value1, T_Value2 value2)
+	public boolean set(T_Key key, T_Value1 value1, T_Value2 value2)
 	{
 		if(!data.containsKey(key))
 			return false;
@@ -32,22 +17,17 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 		return true;
 	}
 	
-	public boolean SetValue1(T_Key key, T_Value1 value)
+	public boolean setValue1(T_Key key, T_Value1 value)
 	{
-		return SetValues(key,value,data.get(key).second);
+		return set(key,value,data.get(key).second);
 	}
 	
-	public boolean SetValue2(T_Key key, T_Value2 value)
+	public boolean setValue2(T_Key key, T_Value2 value)
 	{
-		return SetValues(key,data.get(key).first,value);
+		return set(key,data.get(key).first,value);
 	}
 	
-	public long Size()
-	{
-		return size();
-	}
-	
-	public boolean Insert(T_Key key, Pair<T_Value1, T_Value2> value)
+	public boolean insert(T_Key key, Pair<T_Value1, T_Value2> value)
 	{
 		if(data.containsKey(key))
 			return false;
@@ -55,30 +35,12 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 		return true;
 	}
 	
-	public boolean Insert(T_Key key, T_Value1 value1, T_Value2 value2)
+	public boolean insert(T_Key key, T_Value1 value1, T_Value2 value2)
 	{
-		return Insert(key, new Pair<T_Value1, T_Value2>(value1,value2));
+		return insert(key, new Pair<T_Value1, T_Value2>(value1,value2));
 	}
 	
-	public boolean Remove(T_Key key)
-	{
-		if(!data.containsKey(key))
-			return false;
-		remove(key);
-		return true;
-	}
-	
-	public void Clear()
-	{
-		clear();
-	}
-	
-	public java.util.Set<T_Key> GetKeySet()
-	{
-		return keySet();
-	}
-	
-	public java.util.HashMap<T_Key,T_Value1> GetNewMapOfValue1()
+	public java.util.HashMap<T_Key,T_Value1> getNewMapOfValue1()
 	{
 		java.util.HashMap<T_Key,T_Value1> ret = new java.util.HashMap<T_Key,T_Value1>();
 		@SuppressWarnings("unchecked")
@@ -90,7 +52,7 @@ public class TripleMap<T_Key, T_Value1, T_Value2> implements java.util.Map<T_Key
 		return ret;
 	}
 	
-	public java.util.HashMap<T_Key,T_Value2> GetNewMapOfValue2()
+	public java.util.HashMap<T_Key,T_Value2> getNewMapOfValue2()
 	{
 		java.util.HashMap<T_Key,T_Value2> ret = new java.util.HashMap<T_Key,T_Value2>();
 		@SuppressWarnings("unchecked")

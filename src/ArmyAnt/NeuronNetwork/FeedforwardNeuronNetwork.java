@@ -1,6 +1,7 @@
 package ArmyAnt.NeuronNetwork;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import ArmyAnt.Algorithm.Digraph;
@@ -37,10 +38,10 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
             keys = (T_Tag[]) neurons[floor].keySet().toArray();
             floors.put(floor, keys);
             for (int i = 0; i < keys.length; i++) {
-                neuronGraph.AddNode(new NeuronNetworkData<T_Data>(floor, new Neuron(commonActiveFunc), neurons[floor].get(keys[i])), keys[i], java.lang.Math.random() * (max - min) / 100 + min);
+                neuronGraph.put(new NeuronNetworkData<T_Data>(floor, new Neuron(commonActiveFunc), neurons[floor].get(keys[i])), keys[i], java.lang.Math.random() * (max - min) / 100 + min);
                 if (lastKeys != null) {
                     for (int n = 0; n < lastKeys.length; n++)
-                        neuronGraph.LinkNode(keys[i], lastKeys[n], java.lang.Math.random() * (max - min) / 100 + min);
+                        neuronGraph.linkNode(keys[i], lastKeys[n], java.lang.Math.random() * (max - min) / 100 + min);
                 }
             }
         }
@@ -52,11 +53,11 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
      * @param input
      * @return
      */
-    public java.util.Map<T_Tag, Double> Input(java.util.Map<T_Tag, Double> input) {
+    public java.util.Map<T_Tag, Double> input(java.util.Map<T_Tag, Double> input) {
         for (int i = 0; i < floors.size(); i++) {
-            input = InputOneFloor(i, input, true);
+            input = inputOneFloor(i, input, true);
         }
-        ClearInputData();
+        clearInputData();
         return input;
     }
 
@@ -66,11 +67,11 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
      * @param input
      * @return
      */
-    public java.util.Map<T_Tag, Double> Test(java.util.Map<T_Tag, Double> input) {
+    public java.util.Map<T_Tag, Double> test(Map<T_Tag, Double> input) {
         for (int i = 0; i < floors.size(); i++) {
-            input = InputOneFloor(i, input, false);
+            input = inputOneFloor(i, input, false);
         }
-        ClearInputData();
+        clearInputData();
         return input;
     }
 
@@ -81,18 +82,18 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
      * @param rightOutput
      * @return
      */
-    public boolean Train(java.util.Map<T_Tag, Double> input, java.util.Map<T_Tag, Double> rightOutput) {
+    public boolean train(java.util.Map<T_Tag, Double> input, java.util.Map<T_Tag, Double> rightOutput) {
         // TODO: filling this algorithm
         return false;
     }
 
-    private java.util.Map<T_Tag, Double> InputOneFloor(int floor, java.util.Map<T_Tag, Double> input, boolean record) {
+    private java.util.Map<T_Tag, Double> inputOneFloor(int floor, java.util.Map<T_Tag, Double> input, boolean record) {
         java.util.Map<T_Tag, Double> mid = new java.util.HashMap<T_Tag, Double>();
         input.forEach((T_Tag tag, Double value) -> {
-            neuronGraph.GetNodeValue(tag).neuron.JoinActive(value, 1);
-            mid.put(tag, neuronGraph.GetNodeValue(tag).neuron.GetOutPut());
+            neuronGraph.get(tag).neuron.joinActive(value, 1);
+            mid.put(tag, neuronGraph.get(tag).neuron.getOutPut());
             if (!record)
-                neuronGraph.GetNodeValue(tag).neuron.LeaveActive(value, 1);
+                neuronGraph.get(tag).neuron.leaveActive(value, 1);
         });
         if (floor == floors.size() - 1)
             return mid;
@@ -102,7 +103,7 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
             java.util.ArrayList<Double> sendingValue = new java.util.ArrayList<Double>();
             final T_Tag now = next[i];
             mid.forEach((T_Tag tag, Double value) -> {
-                sendingValue.add(value * neuronGraph.GetLinkWeight(tag, now));
+                sendingValue.add(value * neuronGraph.getLinkWeight(tag, now));
             });
             double total = 0.0;
             for (int n = 0; i < sendingValue.size(); i++) {
@@ -113,16 +114,16 @@ public class FeedforwardNeuronNetwork<T_Tag, T_Data> implements INeuronNetwork<T
         return output;
     }
 
-    private void ClearInputData(){
+    private void clearInputData(){
         for(int i=0;i<floors.size() - 1;i++){
             T_Tag[] tags = floors.get(i);
             for(int j=0; j<tags.length; j++){
-                T_Tag[] linked = neuronGraph.GetNodeAllLinkedOut(tags[j]);
+                T_Tag[] linked = neuronGraph.getNodeAllLinkedOut(tags[j]);
                 for(int k=0; k<linked.length; k++){
-                    neuronGraph.SetLinkWeight(tags[j], linked[k], neuronGraph.GetLinkWeight(tags[j], linked[k]) * neuronGraph.GetNodeValue(tags[j]).neuron.GetOutPut() * lineBalancedParam);
-                    neuronGraph.SetNodeWeight(linked[k], neuronGraph.GetNodeWeight(linked[k]) + neuronGraph.GetNodeValue(tags[j]).neuron.GetOutPut() * nodeBalancedParam);
+                    neuronGraph.setLinkWeight(tags[j], linked[k], neuronGraph.getLinkWeight(tags[j], linked[k]) * neuronGraph.get(tags[j]).neuron.getOutPut() * lineBalancedParam);
+                    neuronGraph.setWeight(linked[k], neuronGraph.getWeight(linked[k]) + neuronGraph.get(tags[j]).neuron.getOutPut() * nodeBalancedParam);
                 }
-                neuronGraph.GetNodeValue(tags[j]).neuron.ClearActive();
+                neuronGraph.get(tags[j]).neuron.clearActive();
             }
         }
     }

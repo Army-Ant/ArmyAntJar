@@ -6,15 +6,15 @@ import java.util.function.Function;
  * Created by Jason-Zhao-Jie on 2016/5/21.
  */
 public class Neuron {
-    public static Function<Double, Double> GetLinerFunction(double slope, double bias) {
+    public static Function<Double, Double> getLinerFunction(double slope, double bias) {
         return (Double input) -> input * slope + bias;
     }
 
-    public static Function<Double, Double> GetLinerFunction(double slope) {
-        return GetLinerFunction(slope, 0);
+    public static Function<Double, Double> getLinerFunction(double slope) {
+        return getLinerFunction(slope, 0);
     }
 
-    public static Function<Double, Double> GetRampFunc(double width, double height) {
+    public static Function<Double, Double> getRampFunc(double width, double height) {
         return (Double input) -> {
             if (input > width)
                 return height;
@@ -24,15 +24,15 @@ public class Neuron {
         };
     }
 
-    public static Function<Double, Double> GetThresholdFunc(double amplitude, double threshold) {
+    public static Function<Double, Double> getThresholdFunc(double amplitude, double threshold) {
         return (Double input) -> input > threshold ? amplitude : 0;
     }
 
-    public static Function<Double, Double> GetSigmoidFunc(double coef){
+    public static Function<Double, Double> getSigmoidFunc(double coef){
         return (Double input) -> 1 / (1 + java.lang.Math.pow(ArmyAnt.ArmyAnt.c_natrualBase, -coef*input));
     }
 
-    public static Function<Double, Double> GetDoubleSigmoidFunc(double coef){
+    public static Function<Double, Double> getDoubleSigmoidFunc(double coef){
         return (Double input) -> 2 / (1 + java.lang.Math.pow(ArmyAnt.ArmyAnt.c_natrualBase, -coef*input)) - 1;
     }
 
@@ -49,41 +49,41 @@ public class Neuron {
         this.threshold = threshold;
     }
 
-    public void SetThreshold(double threshold)
+    public void setThreshold(double threshold)
     {
         this.threshold = threshold;
     }
-    public double GetThreshold()
+    public double getThreshold()
     {
         return threshold;
     }
-    public void SetActiveFunction(Function<Double, Double> activeFunc)
+    public void setActiveFunction(Function<Double, Double> activeFunc)
     {
         this.activeFunc = activeFunc;
     }
 
-    public boolean JoinActive(double input, double weight)
+    public boolean joinActive(double input, double weight)
     {
         inputTotal += input*weight;
         return true;
     }
-    public boolean LeaveActive(double input, double weight)
+    public boolean leaveActive(double input, double weight)
     {
         inputTotal -= input*weight;
         return true;
     }
 
-    public void ClearActive()
+    public void clearActive()
     {
         inputTotal = 0;
     }
 
-    public double GetActiveTotal()
+    public double getActiveTotal()
     {
         return inputTotal;
     }
 
-    public double GetOutPut()
+    public double getOutPut()
     {
         return activeFunc.apply(inputTotal);
     }

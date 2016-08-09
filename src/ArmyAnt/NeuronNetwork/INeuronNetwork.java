@@ -1,5 +1,7 @@
 package ArmyAnt.NeuronNetwork;
 
+import java.util.Map;
+
 /**
  * Created by admin on 2016/7/8.
  */
@@ -30,8 +32,8 @@ public interface INeuronNetwork<T_Tag, T_Data> {
 
     }
 
-    public java.util.Map<T_Tag, Double> Input(java.util.Map<T_Tag, Double> input);
-    public java.util.Map<T_Tag, Double> Test(java.util.Map<T_Tag, Double> input);
-    public boolean Train(java.util.Map<T_Tag, Double> input, java.util.Map<T_Tag, Double> rightOutput);
+    public java.util.Map<T_Tag, Double> input(java.util.Map<T_Tag, Double> input);
+    public java.util.Map<T_Tag, Double> test(Map<T_Tag, Double> input);
+    public boolean train(java.util.Map<T_Tag, Double> input, java.util.Map<T_Tag, Double> rightOutput);
 
 }

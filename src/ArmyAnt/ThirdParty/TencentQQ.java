@@ -11,7 +11,7 @@ import com.qq.connect.utils.json.JSONException;
 import ArmyAnt.Algorithm.TripleMap;
 
 public class TencentQQ {
-	public static TencentQQ Connect(ServletRequest sReq) {
+	public static TencentQQ connect(ServletRequest sReq) {
 		TencentQQ ret = new TencentQQ();
 		ret.req = sReq;
 		ret.oau = new com.qq.connect.oauth.Oauth();
@@ -26,7 +26,7 @@ public class TencentQQ {
 		return ret;
 	}
 
-	public boolean OnConnectSuccess(String successUrl) {
+	public boolean onConnectSuccess(String successUrl) {
 		try {
 			token = oau.getAccessTokenByRequest(req);
 		} catch (QQConnectException e) {
@@ -54,21 +54,21 @@ public class TencentQQ {
 		return true;
 	}
 
-	public String GetRequestUrl() {
+	public String getRequestUrl() {
 		return reqUrl;
 	}
 
-	public String GetAccessToken() {
+	public String getAccessToken() {
 		if (token == null)
 			return null;
 		return token.getAccessToken();
 	}
 
-	public String GetOpenID() {
+	public String getOpenID() {
 		return openId;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_GetUserInfo() {
+	public TripleMap<String, Boolean, Object> qzone_GetUserInfo() {
 		if (userInfo == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -79,19 +79,19 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("avatar_100", true, resp.getAvatar().getAvatarURL100());
-		ret.Insert("avatar_50", true, resp.getAvatar().getAvatarURL50());
-		ret.Insert("avatar_30", true, resp.getAvatar().getAvatarURL30());
-		ret.Insert("gender", true, resp.getGender());
-		ret.Insert("yellowVipLevel", false, resp.getLevel());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("nickname", true, resp.getNickname());
-		ret.Insert("ret", false, resp.getRet());
-		ret.Insert("isYearYellowVip", false, resp.isYellowYearVip() ? 1 : 0);
+		ret.insert("avatar_100", true, resp.getAvatar().getAvatarURL100());
+		ret.insert("avatar_50", true, resp.getAvatar().getAvatarURL50());
+		ret.insert("avatar_30", true, resp.getAvatar().getAvatarURL30());
+		ret.insert("gender", true, resp.getGender());
+		ret.insert("yellowVipLevel", false, resp.getLevel());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("nickname", true, resp.getNickname());
+		ret.insert("ret", false, resp.getRet());
+		ret.insert("isYearYellowVip", false, resp.isYellowYearVip() ? 1 : 0);
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_NewTopic(String content, String parameters) {
+	public TripleMap<String, Boolean, Object> qzone_NewTopic(String content, String parameters) {
 		if (topic == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -102,13 +102,13 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("error_code", false, resp.getErrCode());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("error_code", false, resp.getErrCode());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_NewShare(String title, String url, String siteName,
+	public TripleMap<String, Boolean, Object> qzone_NewShare(String title, String url, String siteName,
 			String srcSiteUrl, String parameters) {
 		if (share == null)
 			return null;
@@ -120,13 +120,13 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("error_code", false, resp.getErrCode());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("error_code", false, resp.getErrCode());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_NewBlog(String title, String content) {
+	public TripleMap<String, Boolean, Object> qzone_NewBlog(String title, String content) {
 		if (blog == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -137,13 +137,13 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("error_code", false, resp.getErrCode());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("error_code", false, resp.getErrCode());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_Album_NewAlbum(String name, String parameters) {
+	public TripleMap<String, Boolean, Object> qzone_Album_NewAlbum(String name, String parameters) {
 		if (album == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -154,20 +154,20 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("id", true, resp.getAlbumID());
-		ret.Insert("class_id", true, resp.getClassID());
-		ret.Insert("cover_url", true, resp.getCoverurl());
-		ret.Insert("create_time", true, resp.getCreateTime());
-		ret.Insert("description", true, resp.getDesc());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("name", true, resp.getName());
-		ret.Insert("picture_num", false, resp.getPicnum());
-		ret.Insert("privious", false, resp.getPriv());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("id", true, resp.getAlbumID());
+		ret.insert("class_id", true, resp.getClassID());
+		ret.insert("cover_url", true, resp.getCoverurl());
+		ret.insert("create_time", true, resp.getCreateTime());
+		ret.insert("description", true, resp.getDesc());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("name", true, resp.getName());
+		ret.insert("picture_num", false, resp.getPicnum());
+		ret.insert("privious", false, resp.getPriv());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_Album_NewPicture(byte[] picData, String parameters) {
+	public TripleMap<String, Boolean, Object> qzone_Album_NewPicture(byte[] picData, String parameters) {
 		if (album == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -179,19 +179,19 @@ public class TencentQQ {
 			return null;
 		}
 
-		ret.Insert("album_id", true, resp.getAlbumID());
-		ret.Insert("large_id", true, resp.getLloc());
-		ret.Insert("large_url", true, resp.getLargeURL());
-		ret.Insert("small_id", true, resp.getSloc());
-		ret.Insert("small_url", true, resp.getSmallURL());
-		ret.Insert("height", false, resp.getHeight());
-		ret.Insert("width", false, resp.getWidth());
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("album_id", true, resp.getAlbumID());
+		ret.insert("large_id", true, resp.getLloc());
+		ret.insert("large_url", true, resp.getLargeURL());
+		ret.insert("small_id", true, resp.getSloc());
+		ret.insert("small_url", true, resp.getSmallURL());
+		ret.insert("height", false, resp.getHeight());
+		ret.insert("width", false, resp.getWidth());
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_Album_GetAlbumList() {
+	public TripleMap<String, Boolean, Object> qzone_Album_GetAlbumList() {
 		if (album == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -206,23 +206,23 @@ public class TencentQQ {
 			return null;
 		}
 
-		ret.Insert("length", false, resp.size());
+		ret.insert("length", false, resp.size());
 		for (int i = 0; i < resp.size(); i++) {
-			ret.Insert(i + "_id", true, resp.get(i).getAlbumID());
-			ret.Insert(i + "_class_id", true, resp.get(i).getClassID());
-			ret.Insert(i + "_cover_url", true, resp.get(i).getCoverurl());
-			ret.Insert(i + "_create_time", true, resp.get(i).getCreateTime());
-			ret.Insert(i + "_description", true, resp.get(i).getDesc());
-			ret.Insert(i + "_msg", true, resp.get(i).getMsg());
-			ret.Insert(i + "_name", true, resp.get(i).getName());
-			ret.Insert(i + "_picture_num", false, resp.get(i).getPicnum());
-			ret.Insert(i + "_privious", false, resp.get(i).getPriv());
-			ret.Insert(i + "_ret", false, resp.get(i).getRet());
+			ret.insert(i + "_id", true, resp.get(i).getAlbumID());
+			ret.insert(i + "_class_id", true, resp.get(i).getClassID());
+			ret.insert(i + "_cover_url", true, resp.get(i).getCoverurl());
+			ret.insert(i + "_create_time", true, resp.get(i).getCreateTime());
+			ret.insert(i + "_description", true, resp.get(i).getDesc());
+			ret.insert(i + "_msg", true, resp.get(i).getMsg());
+			ret.insert(i + "_name", true, resp.get(i).getName());
+			ret.insert(i + "_picture_num", false, resp.get(i).getPicnum());
+			ret.insert(i + "_privious", false, resp.get(i).getPriv());
+			ret.insert(i + "_ret", false, resp.get(i).getRet());
 		}
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Qzone_IsFansOfSomeonePage(String pageQQ) {
+	public TripleMap<String, Boolean, Object> qzone_IsFansOfSomeonePage(String pageQQ) {
 		if (pageFans == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -233,13 +233,13 @@ public class TencentQQ {
 			e.printStackTrace();
 			return null;
 		}
-		ret.Insert("isFans", false, resp.isFans() ? 1 : 0);
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("isFans", false, resp.isFans() ? 1 : 0);
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 
-	public TripleMap<String, Boolean, Object> Tenpay_GetAddressInfo(int firstIndex, int maxLength) {
+	public TripleMap<String, Boolean, Object> tenpay_GetAddressInfo(int firstIndex, int maxLength) {
 		if (tenPay == null)
 			return null;
 		TripleMap<String, Boolean, Object> ret = new TripleMap<String, Boolean, Object>();
@@ -253,22 +253,22 @@ public class TencentQQ {
 		int retNum = resp.getRetNum();
 		java.util.ArrayList<com.qq.connect.javabeans.tenpay.Address> addresses = resp.getAddresses();
 		for(int i=0;i<retNum;i++){
-			ret.Insert(i + "_address_street", true, addresses.get(i).getAddrStreet());
-			ret.Insert(i + "_create_time", true, addresses.get(i).getCreateTime());
-			ret.Insert(i + "_index", true, addresses.get(i).getIndex());
-			ret.Insert(i + "_last_use_time", true, addresses.get(i).getLastUseTime());
-			ret.Insert(i + "_mobile_num", true, addresses.get(i).getMobile());
-			ret.Insert(i + "_last_modified_time", true, addresses.get(i).getModTime());
-			ret.Insert(i + "_name", true, addresses.get(i).getName());
-			ret.Insert(i + "_region_ID", true, addresses.get(i).getRegionID());
-			ret.Insert(i + "_tel", true, addresses.get(i).getTel());
-			ret.Insert(i + "_used_times", true, addresses.get(i).getUsedCount());
-			ret.Insert(i + "_zipcode", false, addresses.get(i).getZipcode());
+			ret.insert(i + "_address_street", true, addresses.get(i).getAddrStreet());
+			ret.insert(i + "_create_time", true, addresses.get(i).getCreateTime());
+			ret.insert(i + "_index", true, addresses.get(i).getIndex());
+			ret.insert(i + "_last_use_time", true, addresses.get(i).getLastUseTime());
+			ret.insert(i + "_mobile_num", true, addresses.get(i).getMobile());
+			ret.insert(i + "_last_modified_time", true, addresses.get(i).getModTime());
+			ret.insert(i + "_name", true, addresses.get(i).getName());
+			ret.insert(i + "_region_ID", true, addresses.get(i).getRegionID());
+			ret.insert(i + "_tel", true, addresses.get(i).getTel());
+			ret.insert(i + "_used_times", true, addresses.get(i).getUsedCount());
+			ret.insert(i + "_zipcode", false, addresses.get(i).getZipcode());
 			
 		}
-		ret.Insert("length", false, retNum);
-		ret.Insert("msg", true, resp.getMsg());
-		ret.Insert("ret", false, resp.getRet());
+		ret.insert("length", false, retNum);
+		ret.insert("msg", true, resp.getMsg());
+		ret.insert("ret", false, resp.getRet());
 		return ret;
 	}
 	

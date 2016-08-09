@@ -10,12 +10,12 @@ public class Pair<T_First, T_Second> {
 		this.second = second;
 	}
 	
-	public Pair<T_Second, T_First> GetSwappedPair()
+	public Pair<T_Second, T_First> getSwappedPair()
 	{
 		return new Pair<T_Second, T_First>(second,first);
 	}
 	
-	public boolean EqualsValue(Pair<T_First, T_Second> value)
+	public boolean equalsValue(Pair<T_First, T_Second> value)
 	{
 		return first.equals(value.first) && second.equals(value.second);
 	}
